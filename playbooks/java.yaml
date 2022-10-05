@@ -1,0 +1,60 @@
+- name: "Tasks for the machines member of the java hostgroup"
+  hosts: java
+  become: yes
+  tasks:
+    - name: Installs Java
+      apt:
+        pkg:
+        - openjdk-17-jre
+        state: present
+
+    - name: Ensures the Geoserver Datadir is created
+      file:
+        path: /mnt/geoserver_datadir
+        state: directory
+        owner: 'www-data'
+        group: 'www-data'
+        mode: '0755'
+
+    - name: Mounts the geoserver_datadir
+      mount:
+        src: 10.0.0.10:/mnt/geoserver_datadir
+        path: /mnt/geoserver_datadir
+        opts: rw,sync,hard
+        state: mounted
+        fstype: nfs
+
+    - name: Ensures the gs cloud directory is created under /opt
+      file:
+        path: /opt/gscloud
+        state: directory
+        owner: 'root'
+        group: 'root'
+        mode: '0755'
+
+    - name: Ensures a directory is created for receiving the logs
+      file:
+        path: "{{ logs_basedir }}"
+        state: directory
+        owner: 'root'
+        group: 'root'
+        mode: '0755'
+
+    - name: Setting up the jar file
+      copy:
+        src: "{{ service.from_jar }}"
+        dest: "{{ service.jar_file_path }}"
+        remote_src: yes
+
+    - name: setup a systemd unit file for the microservice
+      template:
+        src: "templates/java-systemd-service"
+        dest: "/etc/systemd/system/{{ service.name }}.service"
+      register: systemd_unitfile
+
+    - name: start/enable the service
+      systemd:
+        state: restarted
+        daemon_reload: yes
+        name: "{{ service.name }}"
+      when: systemd_unitfile.changed

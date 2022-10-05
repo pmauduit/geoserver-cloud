@@ -1,0 +1,29 @@
+- name: "Tasks to set up a NFS server"
+  hosts: nfs
+  become: yes
+  tasks:
+    - name: Installs NFS
+      apt:
+        pkg:
+        - nfs-kernel-server
+        state: present
+
+    - name: Ensures the Geoserver Datadir is created
+      file:
+        path: /mnt/geoserver_datadir
+        state: directory
+        owner: 'www-data'
+        group: 'www-data'
+        mode: '0755'
+
+    - name: configuring NFS exports
+      lineinfile:
+        path: /etc/exports
+        line: '/mnt/geoserver_datadir 10.0.0.0/8(rw,sync)'
+      notify: restart nfs
+
+  handlers:
+    - name: restart nfs
+      ansible.builtin.service:
+        name: nfs-server
+        state: restarted

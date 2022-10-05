@@ -1,0 +1,13 @@
+[Unit]
+Description={{ service.name }}
+After=syslog.target
+
+[Service]
+User=www-data
+ExecStart=/usr/bin/java -jar {{ service.jar_file_path }}
+SuccessExitStatus=143
+StandardOutput=append:{{ logs_basedir }}/{{ service.name }}.log
+StandardError=append:{{ logs_basedir }}/{{ service.name }}.log
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+- name: "common tasks for all virtual machines"
+  hosts: all
+  tasks:
+  - name: Installs useful packages
+    apt:
+      pkg:
+      - nfs-common
+      state: present
+      update_cache: true
+    become: yes
