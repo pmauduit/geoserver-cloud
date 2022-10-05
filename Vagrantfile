@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
     #{ :name => :gwc,      :ip => "10.0.0.18" },
   ]
 
-  microservices.each_with_index do |val, i|
+  microservices.each do |val|
     config.vm.define val[:name].to_s do |subconfig|
        subconfig.vm.box      = "debian/bullseye64"
        subconfig.vm.hostname = val[:name].to_s
