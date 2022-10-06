@@ -1,5 +1,6 @@
 - name: "common tasks for all virtual machines"
   hosts: all
+  become: yes
   tasks:
   - name: Installs useful packages
     apt:
@@ -7,4 +8,9 @@
       - nfs-common
       state: present
       update_cache: true
-    become: yes
+
+  - name: Populate the /etc/hosts with data from the inventory
+    lineinfile:
+      path: /etc/hosts
+      line: "{{ hostvars[item].ansible_host }} {{ item }}"
+    loop: "{{ groups['all'] }}"

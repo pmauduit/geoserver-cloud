@@ -4,41 +4,50 @@ all:
     nfs:
       ansible_host: 10.0.0.10
 
-    admin:
+    rabbitmq:
       ansible_host: 10.0.0.11
 
-    gateway:
+    config:
       ansible_host: 10.0.0.12
-
-    wfs:
+      java_service:
+        name: config
+        jar_file_path: /opt/gscloud/config.jar
+        from_jar: /vagrant/src/apps/infrastructure/config/target/gs-cloud-config-service-1.0-SNAPSHOT-bin.jar
+    discovery:
       ansible_host: 10.0.0.13
+      java_service:
+        name: discovery
+        jar_file_path: /opt/gscloud/discovery.jar
+        from_jar: /vagrant/src/apps/infrastructure/discovery/target/gs-cloud-discovery-service-1.0-SNAPSHOT-bin.jar
 
-    wms:
+    gateway:
       ansible_host: 10.0.0.14
 
-    wcs:
+    wfs:
       ansible_host: 10.0.0.15
 
-    rest:
+    wms:
       ansible_host: 10.0.0.16
 
-    webui:
+    wcs:
       ansible_host: 10.0.0.17
 
-    gwc:
+    rest:
       ansible_host: 10.0.0.18
+
+    webui:
+      ansible_host: 10.0.0.19
+
+    gwc:
+      ansible_host: 10.0.0.20
 
   children:
     java:
       vars:
         logs_basedir: /var/log/gscloud
       hosts:
-        admin:
-          service:
-            name: admin
-            jar_file_path: /opt/gscloud/admin.jar
-            from_jar: /vagrant/src/apps/infrastructure/admin/target/gs-cloud-admin-service-1.0-SNAPSHOT-bin.jar
-
+        config:
+        discovery:
         gateway:
         wfs:
         wms:
@@ -46,6 +55,3 @@ all:
         rest:
         webui:
         gwc:
-    application:
-      hosts:
-        vagrant:

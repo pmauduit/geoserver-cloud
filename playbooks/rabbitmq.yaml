@@ -1,0 +1,10 @@
+- name: "Tasks for setting up rabbitmq"
+  hosts: rabbitmq
+  tasks:
+  - name: Installs rabbitmq
+    apt:
+      pkg:
+      - rabbitmq-server
+      state: present
+      update_cache: true
+    become: yes

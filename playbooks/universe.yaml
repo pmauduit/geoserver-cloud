@@ -1,3 +1,4 @@
 - import_playbook: common.yaml
+- import_playbook: rabbitmq.yaml
 - import_playbook: java.yaml
 - import_playbook: nfs.yaml
