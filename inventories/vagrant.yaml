@@ -13,15 +13,27 @@ all:
         name: config
         jar_file_path: /opt/gscloud/config.jar
         from_jar: /vagrant/src/apps/infrastructure/config/target/gs-cloud-config-service-1.0-SNAPSHOT-bin.jar
+        environment_variables:
+          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
+
     discovery:
       ansible_host: 10.0.0.13
       java_service:
         name: discovery
         jar_file_path: /opt/gscloud/discovery.jar
         from_jar: /vagrant/src/apps/infrastructure/discovery/target/gs-cloud-discovery-service-1.0-SNAPSHOT-bin.jar
+        environment_variables:
+          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
 
     gateway:
       ansible_host: 10.0.0.14
+      java_service:
+        name: gateway
+        jar_file_path: /opt/gscloud/gateway.jar
+        from_jar: /vagrant/src/apps/infrastructure/gateway/target/gs-cloud-gateway-1.0-SNAPSHOT-bin.jar
+        environment_variables:
+          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
+
 
     wfs:
       ansible_host: 10.0.0.15

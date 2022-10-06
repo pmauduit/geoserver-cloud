@@ -8,8 +8,8 @@ Vagrant.configure("2") do |config|
     { :name => :rabbitmq,  :ip => "10.0.0.11", :memory => 256, :cpu => 2 },
     { :name => :config,    :ip => "10.0.0.12", :memory => 512, :cpu => 2 },
     { :name => :discovery, :ip => "10.0.0.13", :memory => 512, :cpu => 2 },
+    { :name => :gateway,   :ip => "10.0.0.14", :memory => 512, :cpu => 2 },
 
-    #{ :name => :gateway,  :ip => "10.0.0.14" },
     #{ :name => :wfs,      :ip => "10.0.0.15" },
     #{ :name => :wms,      :ip => "10.0.0.16" },
     #{ :name => :wcs,      :ip => "10.0.0.17" },
