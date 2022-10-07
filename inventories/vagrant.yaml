@@ -34,24 +34,59 @@ all:
         environment_variables:
           - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
 
-
     wfs:
       ansible_host: 10.0.0.15
+      java_service:
+        name: wfs
+        jar_file_path: /opt/gscloud/wfs.jar
+        from_jar: /vagrant/src/apps/geoserver/wfs/target/gs-cloud-wfs-1.0-SNAPSHOT-bin.jar
+        environment_variables:
+          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
 
     wms:
       ansible_host: 10.0.0.16
+      java_service:
+        name: wms
+        jar_file_path: /opt/gscloud/wms.jar
+        from_jar: /vagrant/src/apps/geoserver/wms/target/gs-cloud-wms-1.0-SNAPSHOT-bin.jar
+        environment_variables:
+          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
 
     wcs:
       ansible_host: 10.0.0.17
+      java_service:
+        name: wcs
+        jar_file_path: /opt/gscloud/wcs.jar
+        from_jar: /vagrant/src/apps/geoserver/wcs/target/gs-cloud-wcs-1.0-SNAPSHOT-bin.jar
+        environment_variables:
+          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
 
     rest:
       ansible_host: 10.0.0.18
+      java_service:
+        name: rest
+        jar_file_path: /opt/gscloud/rest.jar
+        from_jar: /vagrant/src/apps/geoserver/restconfig/target/gs-cloud-restconfig-v1-1.0-SNAPSHOT-bin.jar
+        environment_variables:
+          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
 
     webui:
       ansible_host: 10.0.0.19
+      java_service:
+        name: webui
+        jar_file_path: /opt/gscloud/webui.jar
+        from_jar: /vagrant/src/apps/geoserver/webui/target/gs-cloud-webui-1.0-SNAPSHOT-bin.jar
+        environment_variables:
+          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
 
     gwc:
       ansible_host: 10.0.0.20
+      java_service:
+        name: gwc
+        jar_file_path: /opt/gscloud/gwc.jar
+        from_jar: /vagrant/src/apps/geoserver/gwc/target/gs-cloud-gwc-1.0-SNAPSHOT-bin.jar
+        environment_variables:
+          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
 
   children:
     java:

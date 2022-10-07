@@ -9,14 +9,12 @@ Vagrant.configure("2") do |config|
     { :name => :config,    :ip => "10.0.0.12", :memory => 512, :cpu => 2 },
     { :name => :discovery, :ip => "10.0.0.13", :memory => 512, :cpu => 2 },
     { :name => :gateway,   :ip => "10.0.0.14", :memory => 512, :cpu => 2 },
-
-    #{ :name => :wfs,      :ip => "10.0.0.15" },
-    #{ :name => :wms,      :ip => "10.0.0.16" },
-    #{ :name => :wcs,      :ip => "10.0.0.17" },
-    #{ :name => :rest,     :ip => "10.0.0.18" },
-    #{ :name => :webui,    :ip => "10.0.0.19" },
-    #{ :name => :gwc,      :ip => "10.0.0.20" },
-
+    { :name => :wfs,       :ip => "10.0.0.15", :memory => 512, :cpu => 2 },
+    { :name => :wms,       :ip => "10.0.0.16", :memory => 512, :cpu => 2 },
+    { :name => :wcs,       :ip => "10.0.0.17", :memory => 512, :cpu => 2 },
+    { :name => :rest,      :ip => "10.0.0.18", :memory => 512, :cpu => 2 },
+    { :name => :webui,     :ip => "10.0.0.19", :memory => 512, :cpu => 2 },
+    { :name => :gwc,       :ip => "10.0.0.20", :memory => 512, :cpu => 2 },
   ]
 
   microservices.each do |val|
