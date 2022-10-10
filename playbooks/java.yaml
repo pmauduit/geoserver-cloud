@@ -58,3 +58,9 @@
         daemon_reload: yes
         name: "{{ java_service.name }}"
       when: systemd_unitfile.changed
+
+  handlers:
+    - name: restart the service
+      ansible.builtin.service:
+        name: "{{ java_service.name }}"
+        state: restarted

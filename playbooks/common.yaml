@@ -5,6 +5,7 @@
   - name: Installs useful packages
     apt:
       pkg:
+      - git
       - nfs-common
       state: present
       update_cache: true

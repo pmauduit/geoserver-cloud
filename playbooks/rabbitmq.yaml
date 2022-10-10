@@ -1,10 +1,24 @@
 - name: "Tasks for setting up rabbitmq"
   hosts: rabbitmq
+  become: yes
   tasks:
-  - name: Installs rabbitmq
-    apt:
-      pkg:
-      - rabbitmq-server
-      state: present
-      update_cache: true
-    become: yes
+    - name: Installs rabbitmq
+      apt:
+        pkg:
+        - rabbitmq-server
+        state: present
+        update_cache: true
+      become: yes
+
+    - name: Relax default configuration for RabbitMQ
+      copy:
+        dest: "/etc/rabbitmq/rabbitmq.conf"
+        content: |
+          loopback_users=none
+      notify: restart rabbitmq
+
+  handlers:
+    - name: restart rabbitmq
+      ansible.builtin.service:
+        name: rabbitmq-server
+        state: restarted

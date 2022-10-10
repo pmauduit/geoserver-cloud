@@ -1,0 +1,8 @@
+- name: "Tasks related to the config microservice only"
+  hosts: config
+  become: yes
+  tasks:
+    - name: Bootstraps the gs cloud configuration
+      git:
+        repo: 'https://github.com/geoserver/geoserver-cloud-config.git'
+        dest: /etc/gscloud

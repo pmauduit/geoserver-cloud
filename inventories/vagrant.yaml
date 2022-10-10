@@ -14,7 +14,8 @@ all:
         jar_file_path: /opt/gscloud/config.jar
         from_jar: /vagrant/src/apps/infrastructure/config/target/gs-cloud-config-service-1.0-SNAPSHOT-bin.jar
         environment_variables:
-          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
+          - CONFIG_NATIVE_PATH=/etc/gscloud
+          - SPRING_PROFILES_ACTIVE=native
 
     discovery:
       ansible_host: 10.0.0.13
@@ -22,8 +23,7 @@ all:
         name: discovery
         jar_file_path: /opt/gscloud/discovery.jar
         from_jar: /vagrant/src/apps/infrastructure/discovery/target/gs-cloud-discovery-service-1.0-SNAPSHOT-bin.jar
-        environment_variables:
-          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
+        environment_variables: []
 
     gateway:
       ansible_host: 10.0.0.14
@@ -31,8 +31,7 @@ all:
         name: gateway
         jar_file_path: /opt/gscloud/gateway.jar
         from_jar: /vagrant/src/apps/infrastructure/gateway/target/gs-cloud-gateway-1.0-SNAPSHOT-bin.jar
-        environment_variables:
-          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
+        environment_variables: []
 
     wfs:
       ansible_host: 10.0.0.15
@@ -41,7 +40,8 @@ all:
         jar_file_path: /opt/gscloud/wfs.jar
         from_jar: /vagrant/src/apps/geoserver/wfs/target/gs-cloud-wfs-1.0-SNAPSHOT-bin.jar
         environment_variables:
-          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
+          - SPRING_PROFILES_ACTIVE=datadir
+          - GEOSERVER_DATA_DIR=/mnt/geoserver_datadir
 
     wms:
       ansible_host: 10.0.0.16
@@ -50,7 +50,8 @@ all:
         jar_file_path: /opt/gscloud/wms.jar
         from_jar: /vagrant/src/apps/geoserver/wms/target/gs-cloud-wms-1.0-SNAPSHOT-bin.jar
         environment_variables:
-          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
+          - SPRING_PROFILES_ACTIVE=datadir
+          - GEOSERVER_DATA_DIR=/mnt/geoserver_datadir
 
     wcs:
       ansible_host: 10.0.0.17
@@ -59,7 +60,8 @@ all:
         jar_file_path: /opt/gscloud/wcs.jar
         from_jar: /vagrant/src/apps/geoserver/wcs/target/gs-cloud-wcs-1.0-SNAPSHOT-bin.jar
         environment_variables:
-          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
+          - SPRING_PROFILES_ACTIVE=datadir
+          - GEOSERVER_DATA_DIR=/mnt/geoserver_datadir
 
     rest:
       ansible_host: 10.0.0.18
@@ -68,7 +70,8 @@ all:
         jar_file_path: /opt/gscloud/rest.jar
         from_jar: /vagrant/src/apps/geoserver/restconfig/target/gs-cloud-restconfig-v1-1.0-SNAPSHOT-bin.jar
         environment_variables:
-          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
+          - SPRING_PROFILES_ACTIVE=datadir
+          - GEOSERVER_DATA_DIR=/mnt/geoserver_datadir
 
     webui:
       ansible_host: 10.0.0.19
@@ -77,7 +80,8 @@ all:
         jar_file_path: /opt/gscloud/webui.jar
         from_jar: /vagrant/src/apps/geoserver/webui/target/gs-cloud-webui-1.0-SNAPSHOT-bin.jar
         environment_variables:
-          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
+          - SPRING_PROFILES_ACTIVE=datadir
+          - GEOSERVER_DATA_DIR=/mnt/geoserver_datadir
 
     gwc:
       ansible_host: 10.0.0.20
@@ -86,12 +90,17 @@ all:
         jar_file_path: /opt/gscloud/gwc.jar
         from_jar: /vagrant/src/apps/geoserver/gwc/target/gs-cloud-gwc-1.0-SNAPSHOT-bin.jar
         environment_variables:
-          - JAVA_OPTS=-XX:MaxRAMPercentage=80 -XshowSettings:system
+          - SPRING_PROFILES_ACTIVE=datadir,debug
+          - GEOSERVER_DATA_DIR=/mnt/geoserver_datadir
 
   children:
     java:
       vars:
         logs_basedir: /var/log/gscloud
+        # Note: we are using s.c.i.ignoredIntefaces=eth0 because every vagrant boxes will have the same IP
+        # address on their eth0, and we are only interested in the IP address being set on the "private"
+        # vagrant network, which is on interface eth1.
+        java_options: -XX:MaxRAMPercentage=80 -XshowSettings:system -Dspring.cloud.inetutils.ignoredInterfaces=eth0
       hosts:
         config:
         discovery:

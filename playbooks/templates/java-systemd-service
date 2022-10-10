@@ -4,7 +4,7 @@ After=syslog.target
 
 [Service]
 User=www-data
-ExecStart=/usr/bin/java -jar {{ java_service.jar_file_path }}
+ExecStart=/usr/bin/java {{ java_options }} -jar {{ java_service.jar_file_path }}
 SuccessExitStatus=143
 StandardOutput=append:{{ logs_basedir }}/{{ java_service.name }}.log
 StandardError=append:{{ logs_basedir }}/{{ java_service.name }}.log

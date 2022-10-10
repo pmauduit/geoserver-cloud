@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
 
   microservices = [
     { :name => :nfs,       :ip => "10.0.0.10", :memory => 256, :cpu => 2 },
-    { :name => :rabbitmq,  :ip => "10.0.0.11", :memory => 256, :cpu => 2 },
+    { :name => :rabbitmq,  :ip => "10.0.0.11", :memory => 512, :cpu => 2 },
     { :name => :config,    :ip => "10.0.0.12", :memory => 512, :cpu => 2 },
     { :name => :discovery, :ip => "10.0.0.13", :memory => 512, :cpu => 2 },
     { :name => :gateway,   :ip => "10.0.0.14", :memory => 512, :cpu => 2 },
