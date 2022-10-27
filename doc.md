@@ -113,6 +113,30 @@ Le [playbook ansible](https://github.com/pmauduit/geoserver-cloud/blob/vagrant-v
 
 Pour mémoire, le [template du fichier de service](https://github.com/pmauduit/geoserver-cloud/blob/vagrant-virtualbox-ansible-deployment/playbooks/templates/java-systemd-service) est versionné dans notre fork.
 
+# Points d'entrée
+
+Une fois les différents services lancés, ces derniers sont exposés via des "points d'entrée" HTTP.
+
+## discovery
+
+Le service `discovery` est basé sur le projet `Eureka` de Netflix. Il donne un aperçu des microservices enregistrés, et est disponible sur l'URL http://discovery:8761.
+
+Ci-après une capture d'écran de l'interface qu'il propose:
+
+![L'interface d'Eureka](./eureka.png)
+
+Du fait des informations qu'il fournit, il est préférable de limiter son accès aux administrateurs.
+
+## gateway
+
+Le service `gateway` est celui qui fournit la connectivité aux autres microservices via le protocole `http`. Il est basé sur le projet `spring cloud gateway`, et est accessible à l'url http://gateway:8080/.
+
+Ci-après une capture d'écran de l'interface de GeoServer, fournie par le service `webui`, une fois connecté en tant qu'administrateur:
+
+![L'inteface de GeoServer](./webui.png)
+
+C'est donc principalement sur le service `gateway` qu'un éventuel proxy HTTP en frontal devra être configuré.
+
 # Services "load-balançables"
 
 Globalement, tous les microservices peuvent être dupliqués, à l'exception de `webui`, qui sert l'interface web de GeoServer. La raison est que GeoServer ne prévoit pas de serialiser (i.e. n'implémente pas les méthodes `equals()` et `hachCode()`) tous les objets qu'il est susceptible de sauvegarder temporairement en session. 
