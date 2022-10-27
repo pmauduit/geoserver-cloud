@@ -1,4 +1,4 @@
-# Abstract
+# GeoServer-cloud hors Docker
 
 L'objet de ce document est d'expliquer comment déployer un [Geoserver Cloud](https://github.com/geoserver/geoserver-cloud) hors docker, dans un environnement de "machines virtuelles classiques".
 
