@@ -63,4 +63,13 @@ services:
       context: ../src/apps/geoserver/gwc/
       args:
         TAG: ${TAG}
-    
+
+  ogcapi:
+    image: geoservercloud/geoserver-cloud-ogcapi:${TAG}
+    build:
+      no_cache: true
+      pull: false
+      context: ../src/apps/geoserver/ogcapi/
+      args:
+        TAG: ${TAG}
+

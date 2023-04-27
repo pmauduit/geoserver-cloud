@@ -98,3 +98,13 @@ services:
         required: true
     volumes:
       - config:/etc/geoserver
+
+  ogcapi:
+    environment:
+      SPRING_PROFILES_ACTIVE: "${GEOSERVER_DEFAULT_PROFILES},standalone"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+        required: true
+    volumes:
+      - config:/etc/geoserver

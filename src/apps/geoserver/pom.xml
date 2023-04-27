@@ -12,6 +12,7 @@
   <modules>
     <module>wfs</module>
     <module>wms</module>
+    <module>ogcapi</module>
     <module>wcs</module>
     <module>wps</module>
     <module>restconfig</module>

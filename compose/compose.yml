@@ -218,3 +218,18 @@ services:
         condition: service_started
         required: true
 
+  ogcapi:
+    extends:
+      file: templates.yml
+      service: gstemplate
+    image: geoservercloud/geoserver-cloud-ogcapi:${TAG}
+    environment:
+      JAVA_OPTS: "${JAVA_OPTS_OGCAPI}"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+        required: true
+      discovery:
+        condition: service_started
+        required: true
+
