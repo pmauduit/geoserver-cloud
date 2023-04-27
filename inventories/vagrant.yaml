@@ -12,7 +12,7 @@ all:
       java_service:
         name: config
         jar_file_path: /opt/gscloud/config.jar
-        from_jar: /vagrant/src/apps/infrastructure/config/target/gs-cloud-config-service-1.0-SNAPSHOT-bin.jar
+        from_jar: /vagrant/src/apps/infrastructure/config/target/gs-cloud-config-service-1.1-SNAPSHOT-bin.jar
         environment_variables:
           - CONFIG_NATIVE_PATH=/etc/gscloud
           - SPRING_PROFILES_ACTIVE=native
@@ -22,7 +22,7 @@ all:
       java_service:
         name: discovery
         jar_file_path: /opt/gscloud/discovery.jar
-        from_jar: /vagrant/src/apps/infrastructure/discovery/target/gs-cloud-discovery-service-1.0-SNAPSHOT-bin.jar
+        from_jar: /vagrant/src/apps/infrastructure/discovery/target/gs-cloud-discovery-service-1.1-SNAPSHOT-bin.jar
         environment_variables: []
 
     gateway:
@@ -30,7 +30,7 @@ all:
       java_service:
         name: gateway
         jar_file_path: /opt/gscloud/gateway.jar
-        from_jar: /vagrant/src/apps/infrastructure/gateway/target/gs-cloud-gateway-1.0-SNAPSHOT-bin.jar
+        from_jar: /vagrant/src/apps/infrastructure/gateway/target/gs-cloud-gateway-1.1-SNAPSHOT-bin.jar
         environment_variables: []
 
     wfs:
@@ -38,7 +38,7 @@ all:
       java_service:
         name: wfs
         jar_file_path: /opt/gscloud/wfs.jar
-        from_jar: /vagrant/src/apps/geoserver/wfs/target/gs-cloud-wfs-1.0-SNAPSHOT-bin.jar
+        from_jar: /vagrant/src/apps/geoserver/wfs/target/gs-cloud-wfs-1.1-SNAPSHOT-bin.jar
         environment_variables:
           - SPRING_PROFILES_ACTIVE=datadir
           - GEOSERVER_DATA_DIR=/mnt/geoserver_datadir
@@ -48,7 +48,7 @@ all:
       java_service:
         name: wms
         jar_file_path: /opt/gscloud/wms.jar
-        from_jar: /vagrant/src/apps/geoserver/wms/target/gs-cloud-wms-1.0-SNAPSHOT-bin.jar
+        from_jar: /vagrant/src/apps/geoserver/wms/target/gs-cloud-wms-1.1-SNAPSHOT-bin.jar
         environment_variables:
           - SPRING_PROFILES_ACTIVE=datadir
           - GEOSERVER_DATA_DIR=/mnt/geoserver_datadir
@@ -58,7 +58,7 @@ all:
       java_service:
         name: wcs
         jar_file_path: /opt/gscloud/wcs.jar
-        from_jar: /vagrant/src/apps/geoserver/wcs/target/gs-cloud-wcs-1.0-SNAPSHOT-bin.jar
+        from_jar: /vagrant/src/apps/geoserver/wcs/target/gs-cloud-wcs-1.1-SNAPSHOT-bin.jar
         environment_variables:
           - SPRING_PROFILES_ACTIVE=datadir
           - GEOSERVER_DATA_DIR=/mnt/geoserver_datadir
@@ -68,7 +68,7 @@ all:
       java_service:
         name: rest
         jar_file_path: /opt/gscloud/rest.jar
-        from_jar: /vagrant/src/apps/geoserver/restconfig/target/gs-cloud-restconfig-v1-1.0-SNAPSHOT-bin.jar
+        from_jar: /vagrant/src/apps/geoserver/restconfig/target/gs-cloud-restconfig-v1-1.1-SNAPSHOT-bin.jar
         environment_variables:
           - SPRING_PROFILES_ACTIVE=datadir
           - GEOSERVER_DATA_DIR=/mnt/geoserver_datadir
@@ -78,7 +78,7 @@ all:
       java_service:
         name: webui
         jar_file_path: /opt/gscloud/webui.jar
-        from_jar: /vagrant/src/apps/geoserver/webui/target/gs-cloud-webui-1.0-SNAPSHOT-bin.jar
+        from_jar: /vagrant/src/apps/geoserver/webui/target/gs-cloud-webui-1.1-SNAPSHOT-bin.jar
         environment_variables:
           - SPRING_PROFILES_ACTIVE=datadir
           - GEOSERVER_DATA_DIR=/mnt/geoserver_datadir
@@ -88,7 +88,7 @@ all:
       java_service:
         name: gwc
         jar_file_path: /opt/gscloud/gwc.jar
-        from_jar: /vagrant/src/apps/geoserver/gwc/target/gs-cloud-gwc-1.0-SNAPSHOT-bin.jar
+        from_jar: /vagrant/src/apps/geoserver/gwc/target/gs-cloud-gwc-1.1-SNAPSHOT-bin.jar
         environment_variables:
           - SPRING_PROFILES_ACTIVE=datadir,debug
           - GEOSERVER_DATA_DIR=/mnt/geoserver_datadir
