@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
 
   microservices.each do |val|
     config.vm.define val[:name].to_s do |subconfig|
-       subconfig.vm.box      = "debian/bullseye64"
+       subconfig.vm.box      = "debian/bookworm64"
        subconfig.vm.hostname = val[:name].to_s
        subconfig.vm.network :private_network, ip: val[:ip]
        subconfig.vm.provider "virtualbox" do |vb|
